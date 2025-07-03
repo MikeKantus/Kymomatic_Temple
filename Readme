@@ -1,0 +1,44 @@
+%% ------ Método de detección seleccionable ------
+function indices = detectModel(modelName, profile, derivative, params)
+    switch modelName
+        case 'First Derivative'
+            thr = params.sensitivity * std(derivative);
+            idx = find(abs(derivative) > max(thr, params.min_threshold));
+
+        case 'Second Derivative'
+            sd  = diff(derivative);
+            thr = params.sensitivity * std(sd);
+            idx = find(abs(sd) > max(thr, params.min_threshold)) + 1;
+
+        case 'Wavelet Transform'
+            [wt,~] = cwt(profile);
+            coeff  = wt(round(size(wt,1)/2),:);
+            thr    = params.sensitivity * std(coeff);
+            idx    = find(abs(coeff) > max(thr, params.min_threshold));
+
+        case 'Clustering'
+            D      = abs(derivative);
+            [clust, centers] = kmeans(D, 2, 'Replicates', 5);
+            target = find(centers == max(centers), 1);
+            idx    = find(clust == target);
+
+        case 'Kalman Filter'
+            pred = movmean(profile, 5);
+            res  = abs(profile - pred);
+            thr  = params.sensitivity * std(res);
+            idx  = find(res > max(thr, params.min_threshold));
+
+        case 'Spline Regression'
+            pp   = spline((1:numel(profile))', profile);
+            est  = ppval(pp, (1:numel(profile))');
+            res  = abs(profile - est);
+            thr  = params.sensitivity * std(res);
+            idx  = find(res > max(thr, params.min_threshold));
+
+        otherwise
+            idx = [];
+    end
+
+    % Filtrado por índice mínimo
+    indices = idx(idx >= params.start_index);
+end
