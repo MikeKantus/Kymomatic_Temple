@@ -1,4 +1,4 @@
-# Kymomatic_Temple
+#Temple
 
 ## ✨ About the Temple
 
