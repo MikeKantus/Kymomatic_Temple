@@ -1,5 +1,5 @@
-function KymomaticWizard
-    % KymomaticWizard: Sequential application for slope change analysis
+function KymomaticScybil
+    % KymomaticScybil: Sequential application for slope change analysis
     % Step 1: Savitzky–Golay Configuration
     % Step 2: Slope Detection Study
     % Step 3: Visualization of detected points and slope changes
