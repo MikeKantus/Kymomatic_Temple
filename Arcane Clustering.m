@@ -1,10 +1,17 @@
 function ArcaneClustering()
+  
+% Shared variables across nested functions
+    rawData = [];
+    perfilesY = [];
+    resultados = [];
+    perfilesSuavizados = [];
+
     %% Preload audio
-    [splashTone, fsTone] = audioread('splash_tone.wav');
-    [bellSound,   fsBell] = audioread('bell.wav');
+    %[splashTone, fsTone] = audioread('splash_tone.wav');
+    % [bellSound,   fsBell] = audioread('bell.wav');
 
     %% Run splash animation
-    runSplash(splashTone, fsTone);
+    %runSplash(splashTone, fsTone);
 
     %% File selection & sheet list
     [file,path] = uigetfile({'*.xlsx;*.csv'}, 'Select profile data file');
