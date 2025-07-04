@@ -3,7 +3,7 @@ function KymomaticScibyl
 % Inspirado en códices, ciencia y símbolos antiguos.
 
     % Pantalla de bienvenida con imagen y cita
-    showIntroScreen('assets/library_step1_bg.png', ...
+    showIntroScreen_Step1('assets/library_step1_bg.png', ...
         'Kymomatic Scibyl', ...
         'In venatione texturae, veritas latent.');
 
@@ -51,7 +51,7 @@ function KymomaticScibyl
     % Paso 3: resumen y exportación
     showSummaryUI(rawData, detectionIdx, deriv, config);
 end
-function showIntroScreen(imagePath, titleText, subtitle)
+function showIntroScreen_Step1(imagePath, titleText, subtitle)
     fig = figure('Name','Welcome','NumberTitle','off','MenuBar','none', ...
         'ToolBar','none','Resize','off','Position',[500 200 800 500], ...
         'Color','black');
@@ -78,7 +78,7 @@ function showIntroScreen(imagePath, titleText, subtitle)
     % Fade-in
     imgHandle = findall(fig,'Type','image');
     for alpha = linspace(0,1,40)
-        pause(0.02);
+        pause(0.04);
         set(imgHandle, 'AlphaData', alpha);
         drawnow;
     end
@@ -86,7 +86,7 @@ function showIntroScreen(imagePath, titleText, subtitle)
     pause(2.5);
     close(fig);
 end
-function showIntroScreen(imagePath, titleText, subtitle)
+    function showIntroScreen_Step2(imagePath, titleText, subtitle)
     fig = figure('Name','Welcome','NumberTitle','off','MenuBar','none', ...
         'ToolBar','none','Resize','off','Position',[500 200 800 500], ...
         'Color','black');
